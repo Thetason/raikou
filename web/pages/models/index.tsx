@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { MAKERS, MODELS } from '@/data/models'
+import { MAKERS, MODELS } from '../../data/models'
 
 export default function Models() {
   return (
@@ -18,4 +18,3 @@ export default function Models() {
     </main>
   )
 }
-
