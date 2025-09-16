@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { MODELS } from '../../../data/models'
+import { MODELS } from '../../data/models'
 import { useEffect, useState } from 'react'
-import { calculate } from '../../../lib/calc'
+import { calculate } from '../../lib/calc'
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE
 
