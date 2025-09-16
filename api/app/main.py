@@ -18,7 +18,8 @@ def create_app() -> FastAPI:
     app.include_router(programs.router, prefix="/programs", tags=["programs"])
     app.include_router(models.router, prefix="/models", tags=["models"])
     app.include_router(alerts.router, prefix="/alerts", tags=["alerts"])
-    app.include_router(docs.router, prefix="/docs", tags=["docs"]) 
+    # Mount custom metadata endpoints at /meta to keep /docs for Swagger UI
+    app.include_router(docs.router, prefix="/meta", tags=["meta"]) 
     
     @app.get("/healthz")
     def healthz():

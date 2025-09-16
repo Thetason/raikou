@@ -38,24 +38,30 @@ Next Steps
 - Add Admin CMS (rules CRUD + audit log).
 - Scaffold Next.js app for SSR cards (region/model).
 
-Web (Next.js, minimal demo)
+Web (Next.js)
 
-- `cd Raikou/web && npm i && npm run dev`
-- Open: http://localhost:3000 → 홈 → 보조금 계산기(샘플)에서 API 연동 확인
+- 기본(권장): 루트 앱 — `cd Raikou && npm i && npm run dev`
+  - 브라우저: http://localhost:3000
+  - API 연동: 환경변수 `NEXT_PUBLIC_API_BASE` 설정(예: `http://localhost:8000`). 미설정 시 내장 계산 로직 사용
+- 레거시 데모: `web/` 하위 앱 — `cd Raikou/web && npm i && npm run dev`
+  - Docker Compose의 `web` 서비스는 현재 `web/` 앱을 빌드함(변경 가능)
 
 Vercel 배포(웹)
 
 - GitHub 연결: `thetason/raikou`
-- Project root: `Raikou/web`
+- Project root: 루트 Next 앱 `Raikou/`
 - Env (optional): `NEXT_PUBLIC_API_BASE`(API URL). 미설정 시 내장 계산 로직 사용
 - 배포 후: `/models`에서 브랜드별 모델 목록, 각 상세에서 계산 확인
 
 Env Vars
 
-Env Vars
-
 - `DATABASE_URL` — PostgreSQL connection string
 - `OFFLINE_MODE` — true면 스텁 데이터 사용(기본 true)
+- `NEXT_PUBLIC_API_BASE` — 웹에서 사용할 API 베이스 URL (예: `http://localhost:8000`)
+
+메타/소스 엔드포인트
+
+- 커스텀 메타 라우터는 `/meta` 아래에 노출됩니다. 예) `GET /meta/sources/{entity}`
 
 Disclaimer
 
