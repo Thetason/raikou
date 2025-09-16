@@ -22,6 +22,7 @@ def get_grant(
     trimId: Optional[str] = None,
     msrp: Optional[int] = None,
     youth: bool = False,
+    lowIncome: bool = False,
     multichild: bool = False,
     includeIncentive: bool = False,
     discountAmt: int = 0,
@@ -36,10 +37,13 @@ def get_grant(
     national_base = 5_800_000
     # Example local rule: fixed 500,000 KRW
     local_rule = LocalRule(rule_type='fixed', amount_or_ratio=500_000, cap=None)
-    # Example extras: youth 20% of national
-    extras = [
-        ExtraSupport(type='youth', basis='national_percentage', amount_or_ratio=0.2, cap=None)
-    ]
+    # Example extras: youth 20% of national; lowIncome placeholder 10% of national
+    extras: list[ExtraSupport] = []
+    if youth:
+        extras.append(ExtraSupport(type='youth', basis='national_percentage', amount_or_ratio=0.2, cap=None))
+    if lowIncome:
+        # 임시 정책값(10%) — 참고용. 실제 비율은 공고 기준 반영 필요.
+        extras.append(ExtraSupport(type='other', basis='national_percentage', amount_or_ratio=0.1, cap=None))
     flags = CalcFlags(youth=youth, multichild=multichild, include_incentive=includeIncentive, discount_amt=discountAmt)
     result = calculate_grant(
         msrp=msrp,

@@ -44,7 +44,7 @@ Web (Next.js)
   - 브라우저: http://localhost:3000
   - API 연동: 환경변수 `NEXT_PUBLIC_API_BASE` 설정(예: `http://localhost:8000`). 미설정 시 내장 계산 로직 사용
 - 레거시 데모: `web/` 하위 앱 — `cd Raikou/web && npm i && npm run dev`
-  - Docker Compose의 `web` 서비스는 현재 `web/` 앱을 빌드함(변경 가능)
+  - Docker Compose의 `web` 서비스는 루트 앱을 빌드하도록 설정됨
 
 Vercel 배포(웹)
 

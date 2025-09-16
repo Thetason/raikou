@@ -28,13 +28,14 @@ export function calcLocal(rule: LocalRule | undefined, nationalApplied: number, 
   return Math.max(0, Math.round(amt))
 }
 
-export function calcExtras(opts: { youth?: boolean }, nationalApplied: number, localApplied: number): number {
+export function calcExtras(opts: { youth?: boolean; lowIncome?: boolean }, nationalApplied: number, localApplied: number): number {
   let total = 0
   if (opts.youth) total += Math.round(nationalApplied * 0.2)
+  if (opts.lowIncome) total += Math.round(nationalApplied * 0.1)
   return total
 }
 
-export function calculate(msrp: number, nationalBase: number, rule?: LocalRule, flags?: { youth?: boolean }) {
+export function calculate(msrp: number, nationalBase: number, rule?: LocalRule, flags?: { youth?: boolean; lowIncome?: boolean }) {
   const national = applyPriceBand(msrp, nationalBase)
   const local = calcLocal(rule, national, msrp)
   const extra = calcExtras(flags ?? {}, national, local)
@@ -45,4 +46,3 @@ export function calculate(msrp: number, nationalBase: number, rule?: LocalRule, 
     finalPrice: Math.max(0, msrp - total),
   }
 }
-
