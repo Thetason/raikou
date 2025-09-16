@@ -43,6 +43,13 @@ Web (Next.js, minimal demo)
 - `cd Raikou/web && npm i && npm run dev`
 - Open: http://localhost:3000 → 홈 → 보조금 계산기(샘플)에서 API 연동 확인
 
+Vercel 배포(웹)
+
+- GitHub 연결: `thetason/raikou`
+- Project root: `Raikou/web`
+- Env (optional): `NEXT_PUBLIC_API_BASE`(API URL). 미설정 시 내장 계산 로직 사용
+- 배포 후: `/models`에서 브랜드별 모델 목록, 각 상세에서 계산 확인
+
 Env Vars
 
 Env Vars

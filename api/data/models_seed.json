@@ -1,0 +1,22 @@
+{
+  "items": [
+    { "id": "hyundai-ioniq5", "maker": "Hyundai", "name": "IONIQ 5", "msrp_min": 52000000, "msrp_max": 65000000 },
+    { "id": "hyundai-ioniq6", "maker": "Hyundai", "name": "IONIQ 6", "msrp_min": 52000000, "msrp_max": 67000000 },
+    { "id": "hyundai-kona-ev", "maker": "Hyundai", "name": "KONA Electric", "msrp_min": 42000000, "msrp_max": 52000000 },
+
+    { "id": "kia-ev6", "maker": "Kia", "name": "EV6", "msrp_min": 52000000, "msrp_max": 72000000 },
+    { "id": "kia-ev9", "maker": "Kia", "name": "EV9", "msrp_min": 87000000, "msrp_max": 115000000 },
+    { "id": "kia-niro-ev", "maker": "Kia", "name": "Niro EV", "msrp_min": 48000000, "msrp_max": 56000000 },
+
+    { "id": "tesla-model-3", "maker": "Tesla", "name": "Model 3", "msrp_min": 52000000, "msrp_max": 69000000 },
+    { "id": "tesla-model-y", "maker": "Tesla", "name": "Model Y", "msrp_min": 59000000, "msrp_max": 79000000 },
+
+    { "id": "volvo-ex30", "maker": "Volvo", "name": "EX30", "msrp_min": 55000000, "msrp_max": 65000000 },
+    { "id": "volvo-ex90", "maker": "Volvo", "name": "EX90", "msrp_min": 120000000, "msrp_max": 150000000 },
+    { "id": "volvo-xc40-recharge", "maker": "Volvo", "name": "XC40 Recharge", "msrp_min": 72000000, "msrp_max": 82000000 },
+
+    { "id": "polestar-2", "maker": "Polestar", "name": "Polestar 2", "msrp_min": 55000000, "msrp_max": 75000000 },
+    { "id": "polestar-4", "maker": "Polestar", "name": "Polestar 4", "msrp_min": 80000000, "msrp_max": 100000000 }
+  ]
+}
+

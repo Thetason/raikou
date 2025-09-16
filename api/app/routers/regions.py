@@ -1,15 +1,12 @@
 from fastapi import APIRouter, Query
+from typing import List
+from ..schemas import Region
+from ..services import data_service
 
 router = APIRouter()
 
 
-@router.get("")
+@router.get("", response_model=List[Region])
 def search_regions(query: str = Query("") ):
-    # v0: return stubbed structure
-    return {
-        "items": [
-            {"id": "stub-seoul", "sido": "서울특별시", "sigungu": None, "code": "11"}
-        ],
-        "query": query,
-    }
-
+    items = data_service.search_regions(query)
+    return [Region(**i) for i in items]

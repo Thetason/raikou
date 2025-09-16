@@ -1,13 +1,14 @@
 from fastapi import APIRouter
 from datetime import datetime, timedelta
+from ..schemas import Program, ProgramStatus
 
 router = APIRouter()
 
 
-@router.get("/{region_id}/current")
+@router.get("/{region_id}/current", response_model=Program)
 def get_current_program(region_id: str):
     now = datetime.utcnow()
-    return {
+    return Program(**{
         "regionId": region_id,
         "year": 2025,
         "phase": "H2",
@@ -16,12 +17,12 @@ def get_current_program(region_id: str):
         "status": "open",
         "notice_url": "https://example.gov/notice.pdf",
         "countdown_days": 50,
-    }
+    })
 
 
-@router.get("/{program_id}/status")
+@router.get("/{program_id}/status", response_model=ProgramStatus)
 def get_program_status(program_id: str):
-    return {
+    return ProgramStatus(**{
         "programId": program_id,
         "vehicle_type": "passenger",
         "announced_qty": 1000,
@@ -29,5 +30,4 @@ def get_program_status(program_id: str):
         "released_qty": 420,
         "remaining_qty": 360,
         "snapshot_ts": datetime.utcnow().isoformat() + "Z",
-    }
-
+    })

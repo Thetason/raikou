@@ -1,35 +1,38 @@
-from fastapi import APIRouter, Query
-from typing import Optional
+from fastapi import APIRouter, Query, HTTPException
+from typing import Optional, List
 from ..services.calc_engine import (
     calculate_grant, LocalRule, ExtraSupport, CalcFlags
 )
+from ..services import data_service
+from ..schemas import ModelItem, GrantResult, GrantBreakdown
 
 router = APIRouter()
 
 
-@router.get("")
+@router.get("", response_model=List[ModelItem])
 def list_models(filter: Optional[str] = Query(None)):
-    return {
-        "items": [
-            {"id": "stub-ev6", "maker": "기아", "name": "EV6", "segment": "중형"},
-            {"id": "stub-ioniq6", "maker": "현대", "name": "아이오닉 6", "segment": "중형"},
-        ],
-        "filter": filter,
-    }
+    items = data_service.list_models(filter)
+    return [ModelItem(**i) for i in items]
 
 
-@router.get("/{model_id}/grant")
+@router.get("/{model_id}/grant", response_model=GrantResult)
 def get_grant(
     model_id: str,
     regionId: str,
     trimId: Optional[str] = None,
-    msrp: int = 52000000,
+    msrp: Optional[int] = None,
     youth: bool = False,
     multichild: bool = False,
     includeIncentive: bool = False,
     discountAmt: int = 0,
 ):
-    # v0: stubbed national base amount; real impl will look up by model_id/year
+    model = data_service.get_model(model_id)
+    if not model:
+        raise HTTPException(status_code=404, detail="model not found")
+    # derive msrp default from seed if not provided
+    if msrp is None:
+        msrp = int(model.get('msrp_min') or 52_000_000)
+    # v0: stubbed national base amount
     national_base = 5_800_000
     # Example local rule: fixed 500,000 KRW
     local_rule = LocalRule(rule_type='fixed', amount_or_ratio=500_000, cap=None)
@@ -51,5 +54,5 @@ def get_grant(
         "trimId": trimId,
         "msrp": msrp,
     })
-    return result
-
+    # ensure shape via schemas
+    return GrantResult(**result)

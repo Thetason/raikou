@@ -1,10 +1,10 @@
 from fastapi import APIRouter
+from ..schemas import AlertPayload, AlertResponse
 
 router = APIRouter()
 
 
-@router.post("")
-def subscribe_alert(payload: dict):
+@router.post("", response_model=AlertResponse)
+def subscribe_alert(payload: AlertPayload):
     # v0: accept and echo back with id
-    return {"id": "stub-alert-1", "status": "subscribed", "payload": payload}
-
+    return AlertResponse(id="stub-alert-1", status="subscribed", payload=payload)
