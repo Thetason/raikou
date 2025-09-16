@@ -35,26 +35,26 @@ export default function ModelDetail() {
   if (!model) return <main style={{padding:24}}><p>모델을 찾을 수 없습니다.</p></main>
 
   return (
-    <main style={{padding:24, fontFamily:'system-ui'}}>
+    <main>
       <p><Link href="/models">← 목록</Link></p>
       <h2>{model.maker} {model.name}</h2>
-      <div style={{display:'flex', gap:12, alignItems:'center'}}>
+      <div style={{display:'flex', gap:12, alignItems:'center', marginTop:8}}>
         <label>MSRP(원): <input type="number" value={msrp} onChange={e=>setMsrp(Number(e.target.value))}/></label>
         <label><input type="checkbox" checked={youth} onChange={e=>setYouth(e.target.checked)}/> 청년</label>
       </div>
       {result && (
-        <div style={{marginTop:16}}>
-          <h3>결과</h3>
-          <p>예상 실구매가: {result.finalPrice.toLocaleString()} 원</p>
+        <div style={{marginTop:16, padding:16, border:'1px solid #eee', borderRadius:8}}>
+          <h3 style={{marginTop:0}}>예상 실구매가</h3>
+          <p style={{fontSize:28, fontWeight:700}}>{result.finalPrice.toLocaleString()} 원</p>
           <ul>
             <li>국비: {result.breakdown.national.toLocaleString()}원</li>
             <li>지방비: {result.breakdown.local.toLocaleString()}원</li>
             <li>추가지원: {result.breakdown.extra.toLocaleString()}원</li>
             <li>인센티브: {result.breakdown.incentive.toLocaleString()}원</li>
           </ul>
+          <p style={{fontSize:12, color:'#666'}}>가정: 2025 가격구간 규칙, 청년 20% 등. 공고/지침 우선.</p>
         </div>
       )}
     </main>
   )
 }
-
