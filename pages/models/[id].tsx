@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { MODELS } from '../../data/models'
+import { MODELS, type Model } from '../../data/models'
 import { useEffect, useState } from 'react'
 import { calculate } from '../../lib/calc'
 
@@ -29,8 +29,8 @@ const regions = [
 export default function ModelDetail() {
   const router = useRouter()
   const { id } = router.query
-  const model = MODELS.find(x => x.id === id)
-  const [msrp, setMsrp] = useState(52_000_000)
+  const model = MODELS.find(x => x.id === id) as (Model | undefined)
+  const [msrp, setMsrp] = useState<number>(model?.msrpMin ?? 52_000_000)
   const [selectedRegion, setSelectedRegion] = useState('seoul')
   const [youth, setYouth] = useState(false)
   const [lowIncome, setLowIncome] = useState(false)
@@ -41,6 +41,14 @@ export default function ModelDetail() {
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  // When model changes, initialize MSRP from its msrpMin
+  useEffect(() => {
+    if (model?.msrpMin && msrp !== model.msrpMin) {
+      setMsrp(model.msrpMin)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [model?.id])
 
   useEffect(() => {
     if (!model) return
