@@ -37,23 +37,23 @@ export default function ModelDetail() {
   return (
     <main>
       <p><Link href="/models">← 목록</Link></p>
-      <h2>{model.maker} {model.name}</h2>
-      <div className="row" style={{marginTop:8}}>
-        <label>MSRP(원): <input className="input" type="number" value={msrp} onChange={e=>setMsrp(Number(e.target.value))}/></label>
-        <label><input type="checkbox" checked={youth} onChange={e=>setYouth(e.target.checked)}/> 청년</label>
-        <button className="btn btn-primary" onClick={()=>setMsrp(msrp)}>계산</button>
+      <h2 className="text-xl font-semibold mt-1">{model.maker} {model.name}</h2>
+      <div className="flex gap-3 items-center mt-3">
+        <label className="text-sm">MSRP(원): <input className="px-3 py-2 rounded-lg border border-slate-700 bg-slate-900" type="number" value={msrp} onChange={e=>setMsrp(Number(e.target.value))}/></label>
+        <label className="text-sm"><input type="checkbox" className="mr-1" checked={youth} onChange={e=>setYouth(e.target.checked)}/> 청년</label>
+        <button className="px-4 py-2 rounded-lg border border-cyan-700 bg-cyan-900/30 hover:border-cyan-400" onClick={()=>setMsrp(msrp)}>계산</button>
       </div>
       {result && (
-        <div className="card" style={{marginTop:16}}>
-          <h3 style={{marginTop:0}}>예상 실구매가</h3>
-          <p style={{fontSize:28, fontWeight:700}}>{result.finalPrice.toLocaleString()} 원</p>
+        <div className="mt-4 rounded-xl border border-slate-800 bg-gray-950 p-4">
+          <h3 className="mt-0 font-semibold">예상 실구매가</h3>
+          <p className="text-3xl font-extrabold">{result.finalPrice.toLocaleString()} 원</p>
           <ul>
             <li>국비: {result.breakdown.national.toLocaleString()}원</li>
             <li>지방비: {result.breakdown.local.toLocaleString()}원</li>
             <li>추가지원: {result.breakdown.extra.toLocaleString()}원</li>
             <li>인센티브: {result.breakdown.incentive.toLocaleString()}원</li>
           </ul>
-          <p style={{fontSize:12, color:'#666'}}>가정: 2025 가격구간 규칙, 청년 20% 등. 공고/지침 우선.</p>
+          <p className="text-xs text-gray-400">가정: 2025 가격구간 규칙, 청년 20% 등. 공고/지침 우선.</p>
         </div>
       )}
     </main>
