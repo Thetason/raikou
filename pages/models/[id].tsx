@@ -38,12 +38,13 @@ export default function ModelDetail() {
     <main>
       <p><Link href="/models">← 목록</Link></p>
       <h2>{model.maker} {model.name}</h2>
-      <div style={{display:'flex', gap:12, alignItems:'center', marginTop:8}}>
-        <label>MSRP(원): <input type="number" value={msrp} onChange={e=>setMsrp(Number(e.target.value))}/></label>
+      <div className="row" style={{marginTop:8}}>
+        <label>MSRP(원): <input className="input" type="number" value={msrp} onChange={e=>setMsrp(Number(e.target.value))}/></label>
         <label><input type="checkbox" checked={youth} onChange={e=>setYouth(e.target.checked)}/> 청년</label>
+        <button className="btn btn-primary" onClick={()=>setMsrp(msrp)}>계산</button>
       </div>
       {result && (
-        <div style={{marginTop:16, padding:16, border:'1px solid #eee', borderRadius:8}}>
+        <div className="card" style={{marginTop:16}}>
           <h3 style={{marginTop:0}}>예상 실구매가</h3>
           <p style={{fontSize:28, fontWeight:700}}>{result.finalPrice.toLocaleString()} 원</p>
           <ul>

@@ -3,19 +3,21 @@ import { MAKERS, MODELS } from '../../data/models'
 
 export default function Models() {
   return (
-    <main style={{padding:24, fontFamily:'system-ui'}}>
-      <h2>차종 목록 (MVP)</h2>
+    <main>
+      <h2 style={{margin:'8px 0 12px'}}>차종 목록</h2>
       {MAKERS.map(m => (
-        <section key={m} style={{marginBottom:16}}>
+        <section key={m} className="card" style={{marginBottom:12}}>
           <h3>{m}</h3>
-          <ul>
+          <div className="grid">
             {MODELS.filter(x=>x.maker===m).map(x=> (
-              <li key={x.id}><Link href={`/models/${x.id}`}>{x.name}</Link></li>
+              <Link key={x.id} href={`/models/${x.id}`} className="card">
+                <strong>{x.name}</strong>
+                <p className="muted">{m}</p>
+              </Link>
             ))}
-          </ul>
+          </div>
         </section>
       ))}
     </main>
   )
 }
-
